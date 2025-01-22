@@ -48,6 +48,7 @@ const directorsData = [
     top_rated_film: "Далласский клуб покупателей",
   },
 ];
+// const directorsData = [];
 
 function createElementWithClass(tag, className, textContent = "") {
   const newElem = document.createElement(tag);
@@ -185,7 +186,7 @@ function changeTitleText(message) {
 
 function main() {
   if (!checkDirectorsData() || !directorsListElement || !moviesSection) {
-    changeTitleText("Упс, что-то пошло не так");
+    changeTitleText("Упс, что-то пошло не так =(");
     return;
   }
   const [directorElements, topMovies] = processDirectorsData();

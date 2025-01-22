@@ -11,22 +11,71 @@ body {
   background-size: cover;
 }
 
+a {
+  cursor: pointer;
+  color: inherit;
+}
+
 .error {
-  color: red;
+  color: rgb(71, 19, 19);
 }
 
 .title,
 .movies__title {
+  margin-bottom: 30px;
   text-align: center;
+  font-size: 45px;
+  font-family: "Oswald", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.director__info,
+.movies__paragraph {
+  font-size: 24px;
+  font-family: "PT Sans", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.title {
+  margin-top: 100px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.directors {
+  margin: 0 40px 30px 100px;
+}
+
+.director {
+  margin-bottom: 20px;
+  border-bottom: 1px dashed black;
+  font-size: 32px;
   font-family: "Oswald", serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
 }
+.director li {
+  list-style-type: none;
+}
+.director__info {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
 
-.directors,
+.movies {
+  margin-bottom: 100px;
+}
+.movies__title {
+  margin-left: 100px;
+  margin-right: 100px;
+}
 .movies__paragraph {
-  font-family: "PT Sans", serif;
-  font-weight: 400;
-  font-style: normal;
+  margin-left: 100px;
+  margin-right: 10px;
 }
