@@ -1,6 +1,7 @@
-const directorsElem = document.getElementById("directors");
+const directorsListElement = document.getElementById("directors");
+const moviesSection = document.getElementById("movies");
 
-const directorsArr = [
+const directorsData = [
   {
     name: "Стивен Спилберг",
     career: "Продюсер, Режиссёр, Актёр, Сценарист, Монтажёр",
@@ -48,8 +49,6 @@ const directorsArr = [
   },
 ];
 
-const topFilmsList = [];
-
 function createElementWithClass(tag, className, textContent = "") {
   const newElem = document.createElement(tag);
   newElem.classList.add(className);
@@ -59,12 +58,7 @@ function createElementWithClass(tag, className, textContent = "") {
   return newElem;
 }
 
-function createLinkListItem(
-  listItemClassName,
-  linkClassName,
-  textContent,
-  href
-) {
+function createLinkItem(listItemClassName, linkClassName, textContent, href) {
   const listItem = createElementWithClass("li", listItemClassName);
   const linkElem = createElementWithClass("a", linkClassName, textContent);
   linkElem.href = href;
@@ -72,29 +66,74 @@ function createLinkListItem(
   return listItem;
 }
 
-function createDirectorItem(name, roles, filmLink) {
-  const directorContainer = createElementWithClass("li", "director");
+function createDirectorInfoList(name, roles, filmLink) {
   const infoContainer = createElementWithClass("ul", "director__info");
   const nameElement = createElementWithClass("li", "director__name", name);
   const rolesElement = createElementWithClass("li", "director__roles", roles);
-  const linkElement = createLinkListItem(
+  const linkElement = createLinkItem(
     "director__link-container",
     "director__link",
     "Фильмография",
     filmLink
   );
   infoContainer.append(nameElement, rolesElement, linkElement);
+  return infoContainer;
+}
+
+function createDirectorItem(name, roles, filmLink) {
+  const directorContainer = createElementWithClass("li", "director");
+  const infoContainer = createDirectorInfoList(name, roles, filmLink);
   directorContainer.append(infoContainer);
   return directorContainer;
 }
 
-function createAndPasteDirectors() {
-  directorsArr.forEach(({ name, career, films, top_rated_film }) => {
+function processDirectorsData() {
+  const directorElements = [];
+  const topMovies = [];
+  directorsData.forEach(({ name, career, films, top_rated_film }) => {
     const directorItem = createDirectorItem(name, career, films);
-    directorsElem.append(directorItem);
-    topFilmsList.push(top_rated_film);
+    directorElements.push(directorItem);
+    topMovies.push(top_rated_film);
   });
+  return [directorElements, topMovies];
 }
 
-createAndPasteDirectors();
-console.log(topFilmsList);
+function renderDirectors(directorElements) {
+  directorElements.forEach((director) => directorsListElement.append(director));
+}
+
+function generateMoviesSectionContent(topMovies) {
+  const titleElem = createElementWithClass(
+    "h2",
+    "movies__title",
+    "Лучшие фильмы этих режиссеров"
+  );
+  const paragraphText = topMovies.join(", ");
+  const paragraphElem = createElementWithClass(
+    "p",
+    "movies__paragraph",
+    paragraphText
+  );
+  return [titleElem, paragraphElem];
+}
+
+function renderMoviesSectionContent(titleElem, paragraphElem) {
+  moviesSection.append(titleElem, paragraphElem);
+}
+
+function main() {
+  const [directorElements, topMovies] = processDirectorsData();
+  renderDirectors(directorElements);
+  const [titleElem, paragraphElem] = generateMoviesSectionContent(topMovies);
+  renderMoviesSectionContent(titleElem, paragraphElem);
+}
+
+main();
+
+// function createAndrenderDirectors() {
+//   directorsData.forEach(({ name, career, films, top_rated_film }) => {
+//     const directorItem = createDirectorItem(name, career, films);
+//     directorsListElement.append(directorItem);
+//     topFilmsList.push(top_rated_film);
+//   });
+// }
