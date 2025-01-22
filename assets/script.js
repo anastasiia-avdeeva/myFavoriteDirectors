@@ -66,9 +66,8 @@ function createLinkItem(listItemClassName, linkClassName, textContent, href) {
   return listItem;
 }
 
-function createDirectorInfoList(name, roles, filmLink) {
+function createDirectorInfoList(roles, filmLink) {
   const infoContainer = createElementWithClass("ul", "director__info");
-  const nameElement = createElementWithClass("li", "director__name", name);
   const rolesElement = createElementWithClass("li", "director__roles", roles);
   const linkElement = createLinkItem(
     "director__link-container",
@@ -76,13 +75,20 @@ function createDirectorInfoList(name, roles, filmLink) {
     "Фильмография",
     filmLink
   );
-  infoContainer.append(nameElement, rolesElement, linkElement);
+  infoContainer.append(rolesElement, linkElement);
   return infoContainer;
 }
 
+// function createDirectorItem(name, roles, filmLink) {
+//   const directorContainer = createElementWithClass("li", "director");
+//   const infoContainer = createDirectorInfoList(name, roles, filmLink);
+//   directorContainer.append(infoContainer);
+//   return directorContainer;
+// }
+
 function createDirectorItem(name, roles, filmLink) {
-  const directorContainer = createElementWithClass("li", "director");
-  const infoContainer = createDirectorInfoList(name, roles, filmLink);
+  const directorContainer = createElementWithClass("li", "director", name);
+  const infoContainer = createDirectorInfoList(roles, filmLink);
   directorContainer.append(infoContainer);
   return directorContainer;
 }
@@ -121,6 +127,10 @@ function renderMoviesSectionContent(titleElem, paragraphElem) {
   moviesSection.append(titleElem, paragraphElem);
 }
 
+function isArrItemObject(director) {
+  return typeof director === "object";
+}
+
 function checkDirectorData(director) {
   if (
     typeof director.name !== "string" ||
@@ -144,6 +154,11 @@ function isURL(director) {
 function checkDirectorsData() {
   if (!directorsData.length || !Array.isArray(directorsData)) {
     console.log("массив пуст или в переменной directorsData лежит не массив");
+    return false;
+  }
+
+  if (!directorsData.every(isArrItemObject)) {
+    console.log("Один или несколько элементов в массиве не являются объектами");
     return false;
   }
 

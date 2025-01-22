@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+body {
+  background-image: url("../img/film.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.error {
+  color: red;
+}
+
+.title,
+.movies__title {
+  text-align: center;
+  font-family: "Oswald", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.directors,
+.movies__paragraph {
+  font-family: "PT Sans", serif;
+  font-weight: 400;
+  font-style: normal;
+}
