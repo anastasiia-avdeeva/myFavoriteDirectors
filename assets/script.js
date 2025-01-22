@@ -121,7 +121,58 @@ function renderMoviesSectionContent(titleElem, paragraphElem) {
   moviesSection.append(titleElem, paragraphElem);
 }
 
+function checkDirectorData(director) {
+  if (
+    typeof director.name !== "string" ||
+    typeof director.career !== "string" ||
+    typeof director.films !== "string" ||
+    typeof director.top_rated_film !== "string"
+  )
+    return false;
+  return true;
+}
+
+function isURL(director) {
+  try {
+    new URL(director.films);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+function checkDirectorsData() {
+  if (!directorsData.length || !Array.isArray(directorsData)) {
+    console.log("массив пуст или в переменной directorsData лежит не массив");
+    return false;
+  }
+
+  if (!directorsData.every(checkDirectorData)) {
+    console.log(
+      "в каком-то из объектов массива лежит объект с нестрочным значением"
+    );
+    return false;
+  }
+  if (!directorsData.every(isURL)) {
+    console.log(
+      "у какого-то объекта массива значени ключа films не является ссылкой"
+    );
+    return false;
+  }
+  return true;
+}
+
+function changeTitleText(message) {
+  const titleElement = document.querySelector(".title");
+  titleElement.textContent = message;
+  titleElement.classList.add("error");
+}
+
 function main() {
+  if (!checkDirectorsData() || !directorsListElement || !moviesSection) {
+    changeTitleText("Упс, что-то пошло не так");
+    return;
+  }
   const [directorElements, topMovies] = processDirectorsData();
   renderDirectors(directorElements);
   const [titleElem, paragraphElem] = generateMoviesSectionContent(topMovies);
@@ -129,6 +180,7 @@ function main() {
 }
 
 main();
+// console.log("test Url: " + directorsData.every(isURL));
 
 // function createAndrenderDirectors() {
 //   directorsData.forEach(({ name, career, films, top_rated_film }) => {
