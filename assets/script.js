@@ -48,7 +48,6 @@ const directorsData = [
     top_rated_film: "Далласский клуб покупателей",
   },
 ];
-// const directorsData = [];
 
 function createElementWithClass(tag, className, textContent = "") {
   const newElem = document.createElement(tag);
@@ -79,13 +78,6 @@ function createDirectorInfoList(roles, filmLink) {
   infoContainer.append(rolesElement, linkElement);
   return infoContainer;
 }
-
-// function createDirectorItem(name, roles, filmLink) {
-//   const directorContainer = createElementWithClass("li", "director");
-//   const infoContainer = createDirectorInfoList(name, roles, filmLink);
-//   directorContainer.append(infoContainer);
-//   return directorContainer;
-// }
 
 function createDirectorItem(name, roles, filmLink) {
   const directorContainer = createElementWithClass("li", "director", name);
@@ -196,12 +188,3 @@ function main() {
 }
 
 main();
-// console.log("test Url: " + directorsData.every(isURL));
-
-// function createAndrenderDirectors() {
-//   directorsData.forEach(({ name, career, films, top_rated_film }) => {
-//     const directorItem = createDirectorItem(name, career, films);
-//     directorsListElement.append(directorItem);
-//     topFilmsList.push(top_rated_film);
-//   });
-// }
